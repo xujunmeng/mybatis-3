@@ -1,5 +1,5 @@
 /**
- *    Copyright 2009-2017 the original author or authors.
+ *    Copyright 2009-2019 the original author or authors.
  *
  *    Licensed under the Apache License, Version 2.0 (the "License");
  *    you may not use this file except in compliance with the License.
@@ -53,7 +53,7 @@ public class XNode {
 
   public XNode getParent() {
     Node parent = node.getParentNode();
-    if (parent == null || !(parent instanceof Element)) {
+    if (!(parent instanceof Element)) {
       return null;
     } else {
       return new XNode(xpathParser, parent, variables);
@@ -63,7 +63,7 @@ public class XNode {
   public String getPath() {
     StringBuilder builder = new StringBuilder();
     Node current = node;
-    while (current != null && current instanceof Element) {
+    while (current instanceof Element) {
       if (current != node) {
         builder.insert(0, "/");
       }
@@ -288,7 +288,7 @@ public class XNode {
   }
 
   public List<XNode> getChildren() {
-    List<XNode> children = new ArrayList<XNode>();
+    List<XNode> children = new ArrayList<>();
     NodeList nodeList = node.getChildNodes();
     if (nodeList != null) {
       for (int i = 0, n = nodeList.getLength(); i < n; i++) {
